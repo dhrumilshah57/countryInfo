@@ -12,7 +12,6 @@ function App() {
     console.log(value)
     setCountryId(value)
   }
-  //test
   useEffect(() => {
     fetch("https://interview-api.kodecreators.com/api/countries?page=1&per_page=10")
       .then((response) => response.json())
