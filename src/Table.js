@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import useTable from './hooks/useTable';
 import CountryFooter from './CountryFooter';
+import { Link } from 'react-router-dom';
 
 function Table({ data, rowsPerPage, onCountryId }) {
 
@@ -8,7 +9,7 @@ function Table({ data, rowsPerPage, onCountryId }) {
     const { slice, range } = useTable(data, page, rowsPerPage);
 
     const stateHandler = (event) => {
-        console.log(event.target.value)
+        // console.log(event.target.value)
         onCountryId(event.target.value);
     }
 
@@ -16,7 +17,10 @@ function Table({ data, rowsPerPage, onCountryId }) {
     return (
         <div className="w-full h-screen bg-black text-white">
             <div className="mx-64 py-56">
-                <h1 className="text-4xl mb-10">Countries</h1>
+                <div>
+                    <h1 className="text-4xl mb-10">Countries</h1>
+
+                </div>
                 <table className="grid place-items-center" id="country">
                     {/* <div className="w-full border-2 border-black"> */}
 
@@ -31,7 +35,9 @@ function Table({ data, rowsPerPage, onCountryId }) {
                         return (
                             <tr className="grid grid-cols-2 w-full text-center">
                                 <td className="text-xl">{item.name}</td>
-                                <td className="text-xl"><button onClick={stateHandler} value={item.id} className="bg-blue-300 text-md rounded-lg w-24 m-1" type="">States</button></td>
+                                <td className="text-xl"><Link to="/states"><button onClick={stateHandler} value={item.id} className="bg-blue-300 text-md rounded-lg w-24 m-1" >
+                                    States
+                                </button></Link></td>
                             </tr>
                         )
                     })}

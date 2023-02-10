@@ -1,37 +1,29 @@
-import './App.css'
-import React, { useEffect, useState } from 'react';
-import Table from "./Table";
-import States from './States';
+import React, { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
+import CountryData from './CountryData';
+import StateData from './StateData';
 function App() {
 
-  const [data, setData] = useState([])
-  const [city, setCity] = useState([])
-  const [countryId, setCountryId] = useState()
+  const [countryId,setCountryId] =useState()
 
-  const cityHandler = (value) => {
-    console.log(value)
-    setCountryId(value)
+  const idNumberHandler=(value)=>{
+    // console.log(value)
+    setCountryId(value);
   }
-  //test
-  useEffect(() => {
-    fetch("https://interview-api.kodecreators.com/api/countries?page=1&per_page=10")
-      .then((response) => response.json())
-      .then((actualData) => setData(actualData.data));
-  }, []);
-
-  useEffect(() => {
-    fetch(`https://interview-api.kodecreators.com/api/states/?country_id=${countryId}&per_page=10`)
-      .then((response) => response.json())
-      .then((cityData) => setCity(cityData.data));
-  }, []);
-
-  console.log(data)
-  console.log(city)
 
   return (
     <div>
-      <Table data={data} rowsPerPage={5} onCountryId={cityHandler} />
-      <States data={city} rowsPerPage={5} />
+
+      <Routes>
+        <Route exact path='/' element={<CountryData onStateData={idNumberHandler}/>}/>
+        <Route exact path='/states' element={<StateData items={countryId}/>}/>
+      </Routes>
+
+      {/* <CountryData/> */}
+      {/* <StateData/> */}
+      {/* <Table data={data} rowsPerPage={5}  /> */}
+      {/* <States data={city} rowsPerPage={5} /> */}
     </div>
   )
 }
