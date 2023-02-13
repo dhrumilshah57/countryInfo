@@ -1,24 +1,25 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import States from './States';
+import { useParams } from 'react-router-dom';
 
 function StateData(props) {
 
-    // console.log(props.items)
+  // console.log(props.items)
+  const { id } = useParams();
+  const [state, setState] = useState([])
 
-    const [city, setCity] = useState([])
-
-    useEffect(() => {
-          fetch(`https://interview-api.kodecreators.com/api/states?country_id=${props.items}&per_page=10`)
-            .then((response) => response.json())
-            .then((cityData) => setCity(cityData.data));
-        }, []);
+  useEffect(() => {
+    fetch(`https://interview-api.kodecreators.com/api/states?country_id=${id}&per_page=10`)
+      .then((response) => response.json())
+      .then((cityData) => setState(cityData.data));
+  }, []);
 
 
-        // console.log(city)
+  // console.log(city)
 
   return (
     <div>
-        <States data={city} rowsPerPage={5} />
+      <States data={state} rowsPerPage={5} />
     </div>
   )
 }

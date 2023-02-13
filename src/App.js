@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router-dom';
 import './App.css';
 import CountryData from './CountryData';
 import StateData from './StateData';
+import CityData from './CityData';
+import AddItem from './AddItem';
 function App() {
 
-  const [countryId,setCountryId] =useState()
+  const [countryId, setCountryId] = useState()
 
-  const idNumberHandler=(value)=>{
+  const idNumberHandler = (value) => {
     // console.log(value)
     setCountryId(value);
   }
@@ -16,8 +18,10 @@ function App() {
     <div>
 
       <Routes>
-        <Route exact path='/' element={<CountryData onStateData={idNumberHandler}/>}/>
-        <Route exact path='/states' element={<StateData items={countryId}/>}/>
+        <Route exact path='/countries' element={<CountryData onStateData={idNumberHandler} />} />
+        <Route exact path='/countries/:id/states' element={<StateData />} />
+        <Route exact path='/countries/:id/states/:stateId/cities' element={<CityData />} />
+        <Route path='/additem' element={<AddItem />} />
       </Routes>
 
       {/* <CountryData/> */}
