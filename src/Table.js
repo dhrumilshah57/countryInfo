@@ -24,10 +24,10 @@ function Table({ data, rowsPerPage, onCountryId }) {
                 <table className="grid place-items-center" id="country">
                     {/* <div className="w-full border-2 border-black"> */}
 
-                    <tr className="grid grid-cols-2  w-full text-center rounded-t-xl">
+                    <th className="grid grid-cols-2  w-full text-center rounded-t-xl">
                         <td className="text-3xl ">Name</td>
                         <td className="text-3xl ">Action</td>
-                    </tr>
+                    </th>
 
                     {/* </div> */}
                     {/* <div className="w-full"> */}

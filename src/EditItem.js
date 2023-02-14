@@ -4,8 +4,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 
 
-function Modal({ closeModal }) {
-
+function EditItem({ closeModal, data }) {
+    // console.log(data)
     // const [cityName, setCityName] = useState();
     // const cityNameHandler = (event) => {
     //     setCityName(event.target.value)
@@ -25,7 +25,7 @@ function Modal({ closeModal }) {
                 state_id: stateId,
                 name: values.nameOfCity,
             }
-            fetch('https://interview-api.kodecreators.com/api/cities/create', {
+            fetch(`https://interview-api.kodecreators.com/api/cities/${data.id}/edit`, {
                 method: "POST",
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
@@ -65,7 +65,7 @@ function Modal({ closeModal }) {
                     </button>
                 </div>
                 <div className="text-4xl text-center">
-                    <h1>Add City</h1>
+                    <h1>Rename City</h1>
                 </div>
                 <div className="ml-5 mt-10">
                     <form className="flex flex-col" onSubmit={formik.handleSubmit} method='POST' action="#">
@@ -92,4 +92,4 @@ function Modal({ closeModal }) {
     );
 }
 
-export default Modal;
+export default EditItem;
