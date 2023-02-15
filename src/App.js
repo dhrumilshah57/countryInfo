@@ -1,27 +1,28 @@
 import React, { useState } from 'react';
-import { Route, Routes, useParams } from 'react-router-dom';
+import { Route, Routes, useParams, Outlet } from 'react-router-dom';
 import './App.css';
 import CountryData from './CountryData';
 import StateData from './StateData';
 import CityData from './CityData';
-import AddItem from './AddItem';
+import Home from './Home';
+import PageNotFound from './PageNotFound';
+import River from './River';
+import NavBar from './NavBar';
 function App() {
-
-  const [countryId, setCountryId] = useState()
-
-  const idNumberHandler = (value) => {
-    // console.log(value)
-    setCountryId(value);
-  }
 
   return (
     <div>
-
+      <NavBar />
       <Routes>
-        <Route exact path='/countries' element={<CountryData onStateData={idNumberHandler} />} />
-        <Route exact path='/countries/:id/states' element={<StateData />} />
-        <Route exact path='/countries/:id/states/:stateId/cities' element={<CityData />} />
-        <Route path='/additem' element={<AddItem />} />
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/rivers" element={<River />} />
+
+        <Route exact path='/countries' element={<Outlet />}>
+          <Route exact path='/countries' element={<CountryData />} />
+          <Route exact path='/countries/:id/states' element={<StateData />} />
+          <Route exact path='/countries/:id/states/:stateId/cities' element={<CityData />} />
+        </Route>
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
 
       {/* <CountryData/> */}
